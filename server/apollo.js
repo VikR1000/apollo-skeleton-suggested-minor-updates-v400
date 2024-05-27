@@ -30,8 +30,20 @@ const server = new ApolloServer({
 async function startApolloServer() {
     const {url} = await startStandaloneServer(server, {
         context: async ({req}) => {
-            let userTest3 = await Meteor.users.findOneAsync();
-            let userId = userTest3._id;
+            let userTest = null;
+            let userTest2 = null;
+            let userTest3 = null;
+            let userId = null;
+            try {
+                userTest = await getUser(req.headers.authorization)
+                userTest2 = await Meteor.call(
+                    "getUserId"
+                );
+                userTest3 = await Meteor.users.findOneAsync();
+                userId = userTest3._id;
+            } catch (error) {
+                console.log('context: ', error)
+            }
             return {
                 userId: userId
             };
