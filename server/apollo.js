@@ -30,12 +30,13 @@ const server = new ApolloServer({
 async function startApolloServer() {
     const {url} = await startStandaloneServer(server, {
         context: async ({req}) => {
-            // Extract user information from the request headers
-            // let user = await getUser(req.headers.authorization);
-            let user = '12345';
-            // Return the user object in the context
+            let userTest3 = await Meteor.users.findOneAsync();
+            let userId = userTest3._id;
             return {
-                user,
+                userId: userId
+            };
+            return {
+                userId,
             };
         },
     });
