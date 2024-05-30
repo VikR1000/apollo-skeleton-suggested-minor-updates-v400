@@ -23,9 +23,11 @@ Meteor.methods({
 
 
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-});
+        typeDefs,
+        resolvers,
+    })
+;
+
 
 async function startApolloServer() {
     const {url} = await startStandaloneServer(server, {

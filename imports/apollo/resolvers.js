@@ -3,6 +3,7 @@ import {LinksCollection} from "../api/links";
 const resolvers = {
     Query: {
         getLink: async function findLinkById(parent, args, contextValue) {
+            let user = contextValue;
             // CONTEXT IS AVAILABLE
             return await LinksCollection.findOne(args.id);
         },
