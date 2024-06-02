@@ -8,6 +8,7 @@ import express from 'express';
 import {expressMiddleware} from '@apollo/server/express4';
 import {json} from 'body-parser';
 import {resolvers} from "../imports/apollo/resolvers";
+import {getUserIdByLoginToken} from "../imports/apollo/meteor-apollo-utils";
 
 Meteor.methods({
     'getUserId'() {
@@ -32,17 +33,18 @@ const server = new ApolloServer({
 async function startApolloServer() {
     const {url} = await startStandaloneServer(server, {
         context: async ({req}) => {
+            let token = req.headers['token']
             let userTest = null;
             let userTest2 = null;
             let userTest3 = null;
+            let userTest4 = null;
             let userId = null;
             try {
                 userTest = await getUser(req.headers.authorization)
                 userTest2 = await Meteor.call(
                     "getUserId"
                 );
-                userTest3 = await Meteor.users.findOneAsync();
-                userId = userTest3._id;
+                userTest4 = await getUserIdByLoginToken(token)
             } catch (error) {
                 console.log('context: ', error)
             }
