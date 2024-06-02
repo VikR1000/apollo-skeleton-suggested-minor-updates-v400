@@ -34,25 +34,14 @@ async function startApolloServer() {
     const {url} = await startStandaloneServer(server, {
         context: async ({req}) => {
             let token = req.headers['token']
-            let userTest = null;
-            let userTest2 = null;
-            let userTest3 = null;
-            let userTest4 = null;
             let userId = null;
             try {
-                userTest = await getUser(req.headers.authorization)
-                userTest2 = await Meteor.call(
-                    "getUserId"
-                );
-                userTest4 = await getUserIdByLoginToken(token)
+                userId = await getUserIdByLoginToken(token)
             } catch (error) {
                 console.log('context: ', error)
             }
             return {
                 userId: userId
-            };
-            return {
-                userId,
             };
         },
     });
