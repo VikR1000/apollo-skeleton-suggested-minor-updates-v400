@@ -10,7 +10,7 @@ const server = new ApolloServer({
     })
 ;
 
-
+// see https://www.apollographql.com/docs/apollo-server/data/subscriptions
 async function startApolloServer() {
     const {url} = await startStandaloneServer(server, {
         context: async ({req}) => {
