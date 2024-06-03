@@ -1,27 +1,8 @@
 import {ApolloServer} from '@apollo/server';
 import {startStandaloneServer} from '@apollo/server/standalone'
-import {WebApp} from 'meteor/webapp';
-import {getUser} from 'meteor/apollo';
-import {LinksCollection} from '/imports/api/links';
 import typeDefs from '/imports/apollo/schema';
-import express from 'express';
-import {expressMiddleware} from '@apollo/server/express4';
-import {json} from 'body-parser';
 import {resolvers} from "../imports/apollo/resolvers";
 import {getUserIdByLoginToken} from "../imports/apollo/meteor-apollo-utils";
-
-Meteor.methods({
-    'getUserId'() {
-        let userId = null
-        try {
-            userId = Meteor.userId()
-        } catch (error) {
-            console.log('getUserId: ', error)
-        }
-        return userId
-    }
-});
-
 
 const server = new ApolloServer({
         typeDefs,
@@ -36,7 +17,9 @@ async function startApolloServer() {
             let token = req.headers['token']
             let userId = null;
             try {
-                userId = await getUserIdByLoginToken(token)
+                if (!!token) {
+                    userId = await getUserIdByLoginToken(token)
+                }
             } catch (error) {
                 console.log('context: ', error)
             }
