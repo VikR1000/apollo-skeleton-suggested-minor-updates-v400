@@ -1,7 +1,7 @@
 import { ApolloClient, HttpLink, InMemoryCache, ApolloLink, ApolloProvider } from "@apollo/client";
 
 // Create an HttpLink pointing to your GraphQL endpoint
-const httpLink = new HttpLink({ uri: 'http://localhost:4000' });
+const httpLink = new HttpLink({ uri: 'http://localhost:4000/graphql' });
 
 // Middleware to add custom headers
 const customHeadersMiddleware = new ApolloLink((operation, forward) => {
