@@ -22,10 +22,9 @@ const customHeadersMiddleware = new ApolloLink((operation, forward) => {
 });
 
 // Combine the middleware with the HttpLink
-const client = new ApolloClient({
+const apolloClient = new ApolloClient({
     link: customHeadersMiddleware.concat(httpLink),
     cache: new InMemoryCache(),
 });
 
-
-export {client};
+export {apolloClient};

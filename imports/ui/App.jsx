@@ -3,11 +3,11 @@ import React from 'react';
 import { Hello } from './Hello.jsx';
 import { Info } from './Info.jsx';
 import AccountsPage from "./accounts";
-import {client} from '/imports/apollo/apollo-client'
+import {apolloClient} from '/imports/apollo/apollo-client'
 import {ApolloProvider } from "@apollo/client";
 
 export const App = () => (
-  <ApolloProvider client={client}>
+  <ApolloProvider client={apolloClient}>
       <AccountsPage/>
     <div>
       <h1>Welcome to Meteor! ☄</h1>

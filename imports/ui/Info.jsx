@@ -4,7 +4,6 @@ import {GET_LINK, GET_LINKS} from "../apollo/query-library";
 
 
 export const Info = () => {
-    debugger;
     const {loading, error, data} = useQuery(GET_LINKS);
 
     const {loading: loading2, error: error2, data: data2} = useQuery(GET_LINK, {
